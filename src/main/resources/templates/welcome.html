@@ -33,6 +33,43 @@
         <img class="img-fluid"src="https://raw.githubusercontent.com/JasonFreeberg/my-spring-app/master/src/main/resources/static/GitHub-Mark-120px-plus.png" style="width: 10%">
     </div>
 
+    <br>
+
+    <!-- Task Management Section -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h4>Task Manager</h4>
+
+            <!-- Add Task Form -->
+            <form method="post" th:action="@{/tasks}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="task" class="form-control" placeholder="Enter a new task..." required/>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Add Task</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Filter Box -->
+            <form method="get" th:action="@{/}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="filter" id="filterInput" class="form-control"
+                           placeholder="Filter tasks by keyword..." th:value="${filter}"/>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary">Filter</button>
+                        <a th:href="@{/}" class="btn btn-outline-secondary">Clear</a>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Task List -->
+            <ul class="list-group">
+                <li class="list-group-item" th:each="task : ${tasks}" th:text="${task}">Task</li>
+                <li class="list-group-item text-muted" th:if="${#lists.isEmpty(tasks)}">No tasks found.</li>
+            </ul>
+        </div>
+    </div>
+
 </main>
 <!-- /.container -->
 
