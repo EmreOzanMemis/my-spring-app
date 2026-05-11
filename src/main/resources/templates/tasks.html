@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Task Manager - Spring Boot</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Spring Boot on App Service</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item active"><a class="nav-link" href="/tasks">Tasks</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <h1>Task Manager</h1>
+        <p class="lead">Add, view, and filter your tasks below.</p>
+    </div>
+
+    <!-- Add Task Form -->
+    <div class="card mb-4">
+        <div class="card-header">Add a New Task</div>
+        <div class="card-body">
+            <form th:action="@{/tasks/add}" method="post" class="form-inline">
+                <input type="text" name="task" class="form-control mr-2 flex-grow-1"
+                       placeholder="Enter a new task..." required/>
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Filter Form -->
+    <div class="card mb-4">
+        <div class="card-header">Filter Tasks</div>
+        <div class="card-body">
+            <form th:action="@{/tasks}" method="get" class="form-inline">
+                <input type="text" name="keyword" class="form-control mr-2 flex-grow-1"
+                       th:value="${keyword}" placeholder="Search by keyword..."/>
+                <button type="submit" class="btn btn-secondary">Search</button>
+                <a th:href="@{/tasks}" class="btn btn-outline-secondary ml-2">Clear</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Task List -->
+    <div class="card">
+        <div class="card-header">
+            Tasks
+            <span th:if="${keyword != null and !keyword.isEmpty()}"
+                  class="badge badge-info ml-2"
+                  th:text="'Filtered by: ' + ${keyword}"></span>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item text-muted"
+                th:if="${tasks.isEmpty()}">No tasks found.</li>
+            <li class="list-group-item"
+                th:each="task : ${tasks}"
+                th:text="${task}"></li>
+        </ul>
+    </div>
+
+</main>
+<!-- /.container -->
+
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
