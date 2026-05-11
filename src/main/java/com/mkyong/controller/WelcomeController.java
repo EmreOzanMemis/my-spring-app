@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -19,7 +20,7 @@ public class WelcomeController {
     @Value("${welcome.message}")
     private String message;
 
-    private List<String> tasks = new ArrayList<>(java.util.Arrays.asList("Buy groceries", "Read a book", "Write unit tests"));
+    private List<String> tasks = Collections.synchronizedList(new ArrayList<>(java.util.Arrays.asList("Buy groceries", "Read a book", "Write unit tests")));
 
     @GetMapping("/")
     public String main(@RequestParam(name = "filter", required = false, defaultValue = "") String filter,
@@ -31,8 +32,9 @@ public class WelcomeController {
             model.addAttribute("tasks", tasks);
         } else {
             List<String> filtered = new ArrayList<>();
+            String lowerFilter = filter.toLowerCase();
             for (String task : tasks) {
-                if (task.toLowerCase().contains(filter.toLowerCase())) {
+                if (task.toLowerCase().contains(lowerFilter)) {
                     filtered.add(task);
                 }
             }
