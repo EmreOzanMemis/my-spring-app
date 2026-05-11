@@ -66,6 +66,12 @@ mvn clean install
 ### 3. Uygulamayı Başlatın
 
 ```bash
+./mvnw spring-boot:run
+```
+
+Bu klonda Maven Wrapper dosyaları yoksa aynı komutu aşağıdaki şekilde çalıştırabilirsiniz:
+
+```bash
 mvn spring-boot:run
 ```
 
@@ -124,6 +130,16 @@ my-spring-app/
 ├── pom.xml                           # Maven bağımlılıkları
 └── README.md
 ```
+
+---
+
+## ✅ Task Demo Özellikleri
+
+Uygulamadaki welcome sayfası artık basit bir görev yönetimi demosu da içerir:
+
+- Yeni görev eklemek için bir form
+- Görevleri anahtar kelimeyle filtrelemek için bir arama kutusu
+- Veritabanı olmadan, bellek içinde tutulan görev listesi
 
 ---
 
