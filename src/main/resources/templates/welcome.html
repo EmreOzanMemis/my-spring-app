@@ -24,6 +24,7 @@
         <h3>
             ... deployed onto Azure with GitHub Actions
         </h3>
+        <p class="lead" th:text="${message}">Welcome</p>
     </div>
 
     <br>
@@ -32,6 +33,38 @@
         <img class="img-fluid"src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/169px-Heart_coraz%C3%B3n.svg.png" style="width: 10%">
         <img class="img-fluid"src="https://raw.githubusercontent.com/JasonFreeberg/my-spring-app/master/src/main/resources/static/GitHub-Mark-120px-plus.png" style="width: 10%">
     </div>
+
+    <section class="mt-4">
+        <h2>Task Demo</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <form th:action="@{/tasks}" method="post" class="form-inline mb-3">
+                    <label class="sr-only" for="task">New task</label>
+                    <input id="task" name="task" type="text" class="form-control mr-2 mb-2" placeholder="Add a task"/>
+                    <button type="submit" class="btn btn-primary mb-2">Add Task</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form th:action="@{/}" method="get" class="form-inline mb-3 justify-content-md-end">
+                    <label class="sr-only" for="filter">Filter tasks</label>
+                    <input id="filter" name="filter" type="text" class="form-control mr-2 mb-2"
+                           placeholder="Filter tasks" th:value="${filter}"/>
+                    <button type="submit" class="btn btn-outline-secondary mb-2 mr-2">Filter</button>
+                    <a class="btn btn-link mb-2" th:href="@{/}">Clear</a>
+                </form>
+            </div>
+        </div>
+
+        <div class="alert alert-success" role="alert" th:if="${taskAdded}">
+            Task added.
+        </div>
+
+        <ul class="list-group">
+            <li class="list-group-item" th:each="task : ${tasks}" th:text="${task}">Sample task</li>
+            <li class="list-group-item text-muted" th:if="${#lists.isEmpty(tasks)}">No tasks found.</li>
+        </ul>
+    </section>
 
 </main>
 <!-- /.container -->

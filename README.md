@@ -75,6 +75,21 @@ mvn spring-boot:run
 http://localhost:8080
 ```
 
+### 5. Testleri Çalıştırın
+
+```bash
+mvn test
+```
+
+### 6. Demo Özellikleri
+
+Uygulama açıldığında mevcut welcome sayfası korunur ve aynı sayfada basit bir görev yönetimi demosu gösterilir:
+
+- Varsayılan görevler bellekte tutulur, veritabanı kullanılmaz.
+- **Add Task** formu ile yeni görev eklenebilir.
+- **Filter** alanı ile görevler anahtar kelimeye göre filtrelenebilir.
+- `/hello?name=...` endpoint'i mevcut davranışını korur ve aynı sayfayı göstermeye devam eder.
+
 ---
 
 ## 🐳 Docker ile Çalıştırma
@@ -116,10 +131,12 @@ my-spring-app/
 │   └── workflows/
 │       └── master_javaappmaster.yml  # GitHub Actions CI/CD
 ├── src/
-│   └── main/
-│       ├── java/                     # Java kaynak kodları
-│       └── resources/
-│           └── templates/            # Thymeleaf HTML şablonları
+│   ├── main/
+│   │   ├── java/                     # Java kaynak kodları
+│   │   └── resources/
+│   │       └── templates/            # Thymeleaf HTML şablonları
+│   └── test/
+│       └── java/                     # Controller testleri
 ├── Dockerfile                        # Multi-stage Docker build
 ├── pom.xml                           # Maven bağımlılıkları
 └── README.md
